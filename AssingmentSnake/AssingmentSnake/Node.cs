@@ -8,24 +8,12 @@ namespace AssingmentSnake
 {
     public class Node
     {
-        private int x, y;
         private bool visited, obstacle;
 
-        public Node(int x, int y, bool obstacle = false)
+        public Node(bool obstacle = false)
         {
-            this.x = x;
-            this.y = y;
             Obstacle = obstacle;
-        }
-
-        public int Y
-        {
-            get { return y; }
-        }
-
-        public int X
-        {
-            get { return x; }
+            Visited = false;
         }
 
         public bool Visited

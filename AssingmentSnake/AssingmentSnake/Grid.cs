@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AssingmentSnake
 {
-    class Grid
+    public class Grid
     {
+        public Grid(int x, int y)
+        {
+
+        }
     }
 }
