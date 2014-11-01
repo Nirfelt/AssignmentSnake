@@ -6,11 +6,33 @@ using System.Threading.Tasks;
 
 namespace AssingmentSnake
 {
-    public class Grid
+    public partial class Grid
     {
-        public Grid(int x, int y)
-        {
+        private Node[,] grid;
+        private int[,] obstacles;
+        private int x, y, numberOfObstacles;
 
+        public Grid()
+        {
+            grid = new Node[X, Y];
+        }
+
+        public int X
+        {
+            get { return x; }
+            set { x = value; }
+        }
+
+        public int Y
+        {
+            get { return y; }
+            set { y = value; }
+        }
+
+        public int NumberOfObstacles
+        {
+            get { return numberOfObstacles; }
+            set { numberOfObstacles = value; }
         }
     }
 }
