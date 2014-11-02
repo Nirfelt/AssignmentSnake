@@ -27,7 +27,7 @@ namespace AssingmentSnake
             get { return obstacle; }
             set { obstacle = value; }
         }
-
+        
         public override string ToString()
         {
             if (obstacle)
