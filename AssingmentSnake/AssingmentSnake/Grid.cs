@@ -18,7 +18,7 @@ namespace AssingmentSnake
         {
             xValueObst = new List<int>();
             yValueObst = new List<int>();
-            grid = new Node[X, Y];
+            //grid = new Node[X, Y];
         }
 
         public int X

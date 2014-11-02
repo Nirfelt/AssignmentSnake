@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace AssingmentSnake
 {
-    static class GUI
+    static class Program
     {
         /// <summary>
         /// The main entry point for the application.

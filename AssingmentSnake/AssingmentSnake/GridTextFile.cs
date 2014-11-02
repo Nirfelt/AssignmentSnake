@@ -32,11 +32,13 @@ namespace AssingmentSnake
                         NumberOfObstacles = Convert.ToInt32(lineOneValues[2].Trim());
                         lineOne = false;
                     }
-
-                    string rowData = reader.ReadLine();
-                    string[] obstacleValues = rowData.Split(',');
-                    xValueObst.Add(Convert.ToInt32(obstacleValues[0].Trim()));
-                    yValueObst.Add(Convert.ToInt32(obstacleValues[1].Trim()));
+                    else
+                    {
+                        string rowData = reader.ReadLine();
+                        string[] obstacleValues = rowData.Split(',');
+                        xValueObst.Add(Convert.ToInt32(obstacleValues[0].Trim()));
+                        yValueObst.Add(Convert.ToInt32(obstacleValues[1].Trim()));
+                    }
                 }
                 ok = true;
 
