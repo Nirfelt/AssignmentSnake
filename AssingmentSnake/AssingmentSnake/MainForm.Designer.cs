@@ -30,6 +30,9 @@
         {
             this.btnReadTxtFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txbDisplay = new System.Windows.Forms.RichTextBox();
+            this.txbSolution = new System.Windows.Forms.RichTextBox();
+            this.btnGetSolution = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnReadTxtFile
@@ -46,11 +49,40 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // txbDisplay
+            // 
+            this.txbDisplay.Location = new System.Drawing.Point(12, 13);
+            this.txbDisplay.Name = "txbDisplay";
+            this.txbDisplay.Size = new System.Drawing.Size(380, 337);
+            this.txbDisplay.TabIndex = 1;
+            this.txbDisplay.Text = "";
+            // 
+            // txbSolution
+            // 
+            this.txbSolution.Location = new System.Drawing.Point(400, 13);
+            this.txbSolution.Name = "txbSolution";
+            this.txbSolution.Size = new System.Drawing.Size(75, 337);
+            this.txbSolution.TabIndex = 2;
+            this.txbSolution.Text = "";
+            // 
+            // btnGetSolution
+            // 
+            this.btnGetSolution.Location = new System.Drawing.Point(12, 369);
+            this.btnGetSolution.Name = "btnGetSolution";
+            this.btnGetSolution.Size = new System.Drawing.Size(75, 23);
+            this.btnGetSolution.TabIndex = 3;
+            this.btnGetSolution.Text = "Sök lösning";
+            this.btnGetSolution.UseVisualStyleBackColor = true;
+            this.btnGetSolution.Click += new System.EventHandler(this.btnGetSolution_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 404);
+            this.Controls.Add(this.btnGetSolution);
+            this.Controls.Add(this.txbSolution);
+            this.Controls.Add(this.txbDisplay);
             this.Controls.Add(this.btnReadTxtFile);
             this.Name = "MainForm";
             this.Text = "Snake";
@@ -62,6 +94,9 @@
 
         private System.Windows.Forms.Button btnReadTxtFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.RichTextBox txbDisplay;
+        private System.Windows.Forms.RichTextBox txbSolution;
+        private System.Windows.Forms.Button btnGetSolution;
     }
 }
 

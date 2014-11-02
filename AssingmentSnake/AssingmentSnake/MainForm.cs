@@ -35,5 +35,10 @@ namespace AssingmentSnake
                 }
             }
         }
+
+        private void btnGetSolution_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
