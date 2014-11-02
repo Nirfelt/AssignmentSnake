@@ -33,12 +33,28 @@ namespace AssingmentSnake
                 {
                     MessageBox.Show(errorMessage);
                 }
+                grid.GenerateGrid();
+                UpdateTxbDisplay();
             }
         }
 
         private void btnGetSolution_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void UpdateTxbDisplay()
+        {
+            string output = null;
+            for (int i = 0; i < grid.Y; i++)
+            {
+                for (int c = 0; c < grid.X; c++)
+                {
+                    output += " " + grid.GetNodeString(i, c);
+                }
+                output += "\n";
+            }
+            txbDisplay.Text = output;
         }
     }
 }

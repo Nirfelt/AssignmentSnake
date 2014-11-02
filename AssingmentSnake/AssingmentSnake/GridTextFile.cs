@@ -15,7 +15,6 @@ namespace AssingmentSnake
             StreamReader reader = null;
             errorMsg = string.Empty;
             bool lineOne = true;
-            int c = 0;
 
             try
             {
@@ -31,13 +30,16 @@ namespace AssingmentSnake
                         Y = Convert.ToInt32(lineOneValues[1].Trim());
                         NumberOfObstacles = Convert.ToInt32(lineOneValues[2].Trim());
                         lineOne = false;
+                        //System.Windows.Forms.MessageBox.Show(lineOneValues[0].Trim().ToString() + ", " + Convert.ToInt32(lineOneValues[1].Trim()).ToString() + ", " + Convert.ToInt32(lineOneValues[2].Trim()).ToString());
                     }
                     else
                     {
                         string rowData = reader.ReadLine();
                         string[] obstacleValues = rowData.Split(',');
-                        xValueObst.Add(Convert.ToInt32(obstacleValues[0].Trim()));
-                        yValueObst.Add(Convert.ToInt32(obstacleValues[1].Trim()));
+                        int temp = Convert.ToInt32(obstacleValues[0].Trim());
+                        XValueObst.Add(Convert.ToInt32(obstacleValues[0].Trim()));
+                        YValueObst.Add(Convert.ToInt32(obstacleValues[1].Trim()));
+                        //System.Windows.Forms.MessageBox.Show(XValueObst[0].ToString() + "(" + temp + "), " + YValueObst[0].ToString() + "(" + temp + ")");
                     }
                 }
                 ok = true;

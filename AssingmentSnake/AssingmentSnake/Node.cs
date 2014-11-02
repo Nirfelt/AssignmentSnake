@@ -28,5 +28,20 @@ namespace AssingmentSnake
             set { obstacle = value; }
         }
 
+        public override string ToString()
+        {
+            if (obstacle)
+            {
+                return "X";
+            }
+            else if (visited)
+            {
+                return "¤";
+            }
+            else
+            {
+                return "O";
+            }
+        }
     }
 }
