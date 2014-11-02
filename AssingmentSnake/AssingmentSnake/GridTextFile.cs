@@ -19,10 +19,9 @@ namespace AssingmentSnake
 
             try
             {
-                //1. File must exit - otherwise exception is thrown
                 reader = new StreamReader(fileName, Encoding.UTF8);
 
-                while (!reader.EndOfStream) //read to end of file
+                while (!reader.EndOfStream)
                 {
                     if (lineOne)
                     {
@@ -31,23 +30,13 @@ namespace AssingmentSnake
                         X = Convert.ToInt32(lineOneValues[0].Trim());
                         Y = Convert.ToInt32(lineOneValues[1].Trim());
                         NumberOfObstacles = Convert.ToInt32(lineOneValues[2].Trim());
-                        obstacles = new int[NumberOfObstacles, 2];
                         lineOne = false;
                     }
 
                     string rowData = reader.ReadLine();
                     string[] obstacleValues = rowData.Split(',');
-
-                    //2. get the values from a row in the file in the same ordning there were written
-                    string strRowData = reader.ReadLine(); //read the whole row
-                    string[] strValues = strRowData.Split('\n');
-                    prod.Name = strValues[0].Trim();  //delete spaces
-
-                    prod.Price = Convert.ToDouble(strValues[1].Trim());
-                    prod.Count = Convert.ToInt32(strValues[2].Trim());
-
-                    m_productRegistry.Add(prod);
-
+                    xValueObst.Add(Convert.ToInt32(obstacleValues[0].Trim()));
+                    yValueObst.Add(Convert.ToInt32(obstacleValues[1].Trim()));
                 }
                 ok = true;
 
@@ -56,12 +45,11 @@ namespace AssingmentSnake
             {
                 errorMsg = e.Message;
             }
-			finally   //always performed even when no exception is thrown
+			finally
             {
-                //3.  Close the file
                 reader.Close();
             }
             return ok;
-        }//ReadFrom..
+        }
     }
 }

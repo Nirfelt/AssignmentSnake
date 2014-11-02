@@ -9,11 +9,15 @@ namespace AssingmentSnake
     public partial class Grid
     {
         private Node[,] grid;
-        private int[,] obstacles;
+        private bool[,] obstacles;
+        private List<int> xValueObst;
+        private List<int> yValueObst;
         private int x, y, numberOfObstacles;
 
         public Grid()
         {
+            xValueObst = new List<int>();
+            yValueObst = new List<int>();
             grid = new Node[X, Y];
         }
 
