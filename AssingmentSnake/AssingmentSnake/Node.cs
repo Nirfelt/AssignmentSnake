@@ -9,11 +9,50 @@ namespace AssingmentSnake
     public class Node
     {
         private bool visited, obstacle;
+        private int x, y, up = -1, down = -1, left = -1, right = -1;
 
-        public Node(bool obstacle = false)
+        public Node(int x, int y, bool obstacle = false)
         {
+            X = x;
+            Y = y;
             Obstacle = obstacle;
             Visited = false;
+        }
+
+        public int Up
+        {
+            get { return up; }
+            set { up = value; }
+        }
+
+        public int Down
+        {
+            get { return down; }
+            set { down = value; }
+        }
+
+        public int Left
+        {
+            get { return left; }
+            set { left = value; }
+        }
+
+        public int Right
+        {
+            get { return right; }
+            set { right = value; }
+        }
+
+        public int X
+        {
+            get { return x; }
+            set { x = value; }
+        }
+
+        public int Y
+        {
+            get { return y; }
+            set { y = value; }
         }
 
         public bool Visited
@@ -42,6 +81,15 @@ namespace AssingmentSnake
             {
                 return "O";
             }
+        }
+
+        public bool CheckNode()
+        {
+            if (obstacle || visited)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

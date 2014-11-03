@@ -46,11 +46,13 @@ namespace AssingmentSnake
         public void UpdateTxbDisplay()
         {
             string output = null;
+            int index = 0;
             for (int i = 0; i < grid.Y; i++)
             {
                 for (int c = 0; c < grid.X; c++)
                 {
-                    output += " " + grid.GetNodeString(i, c);
+                    output += " " + grid.GetNodeString(index);
+                    index++;
                 }
                 output += "\n";
             }
