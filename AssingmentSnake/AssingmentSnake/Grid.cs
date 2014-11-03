@@ -99,5 +99,11 @@ namespace AssingmentSnake
             get { return yValueObst; }
             set { yValueObst = value; }
         }
+
+        public Node[] GridMap
+        {
+            get { return grid; }
+            set { grid = value; }
+        }
     }
 }
