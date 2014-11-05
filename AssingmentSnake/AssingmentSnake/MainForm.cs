@@ -13,11 +13,12 @@ namespace AssingmentSnake
     public partial class MainForm : Form
     {
         private Grid grid;
+        private Tree tree;
+
         public MainForm()
         {
             InitializeComponent();
             grid = new Grid();
-
         }
 
         private void btnReadTxtFile_Click(object sender, EventArgs e)
@@ -28,6 +29,7 @@ namespace AssingmentSnake
             string errorMessage = string.Empty;
             if (result == DialogResult.OK)
             {
+                grid = new Grid();
                 path = openFileDialog1.FileName;
                 if (!grid.ReadFromTextFile(path, out errorMessage))
                 {
@@ -35,12 +37,17 @@ namespace AssingmentSnake
                 }
                 grid.GenerateGrid();
                 UpdateTxbDisplay();
+                tree = new Tree(grid.GridMap, grid.IntFreeNodes);
             }
         }
 
         private void btnGetSolution_Click(object sender, EventArgs e)
         {
-
+            List<int> tmp = tree.Search();
+            for (int i = 0; i < tmp.Count; i++)
+            {
+                MessageBox.Show(tmp[i].ToString());
+            }
         }
 
         public void UpdateTxbDisplay()

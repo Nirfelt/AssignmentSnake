@@ -36,7 +36,6 @@ namespace AssingmentSnake
                     {
                         string rowData = reader.ReadLine();
                         string[] obstacleValues = rowData.Split(',');
-                        int temp = Convert.ToInt32(obstacleValues[0].Trim());
                         XValueObst.Add(Convert.ToInt32(obstacleValues[0].Trim()));
                         YValueObst.Add(Convert.ToInt32(obstacleValues[1].Trim()));
                         //System.Windows.Forms.MessageBox.Show(XValueObst[0].ToString() + "(" + temp + "), " + YValueObst[0].ToString() + "(" + temp + ")");

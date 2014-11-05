@@ -10,61 +10,81 @@ namespace AssingmentSnake
     {
         private TreeNode root;
         private Node[] gridMap;
-        private bool[] values;
+        private List<int> checkPath;
+        private int longestPath;
 
-        public Tree(Node[] gridMap)
+        public Tree(Node[] gridMap, int longestPath)
         {
-            root = null;
-            values = new bool[gridMap.Length];
+            this.root = null;
             this.gridMap = gridMap;
-            for (int i = 0; i < gridMap.Length; i++)
-            {
-                values[i] = true;
-                if (!gridMap[i].CheckNode())
-                {
-                    values[i] = false;
-                }
-            }
+            this.longestPath = longestPath;
+            checkPath = new List<int>();
+            GenerateTree(this.root);
         }
 
         private void GenerateTree(TreeNode node)
         {
-            if (node == null)
+            if (this.root == null)
             {
                 this.root = new TreeNode(0);
+                checkPath.Add(this.root.Value);
                 GenerateTree(this.root);
             }
-            else
+            if (node == null) return;
+            for (int i = 0; i < gridMap[node.Value].Edges.Count; i++)
             {
-                if ((gridMap[node.Value].Right >= 0) && values[gridMap[node.Value].Right])
+                TreeNode child = new TreeNode(gridMap[node.Value].Edges[i]);
+                if (CheckNodeInPath(child.Value))
                 {
-                    node.Right = new TreeNode(gridMap[node.Value].Right);
-                    values[gridMap[node.Value].Right] = false;
-                    GenerateTree(node.Right);
+                    checkPath.Add(child.Value);
+                    GenerateTree(child);
+                    node.Children.Add(child);
                 }
-                else if ((gridMap[node.Value].Left >= 0) && values[gridMap[node.Value].Left])
+                if (checkPath.Count == longestPath)
                 {
-                    node.Left = new TreeNode(gridMap[node.Value].Left);
-                    values[gridMap[node.Value].Left] = false;
-                    GenerateTree(node.Left);
+                    return;
                 }
-                else if ((gridMap[node.Value].Up >= 0) && values[gridMap[node.Value].Up])
+                else
                 {
-                    node.Up = new TreeNode(gridMap[node.Value].Up);
-                    values[gridMap[node.Value].Up] = false;
-                    GenerateTree(node.Up);
-                }
-                else if ((gridMap[node.Value].Down >= 0) && values[gridMap[node.Value].Down])
-                {
-                    node.Down = new TreeNode(gridMap[node.Value].Down);
-                    values[gridMap[node.Value].Down] = false;
-                    GenerateTree(node.Down);
-                }
-                else 
-                { 
-
+                    UpdateCheckPath(node.Value);
                 }
             }
+        }
+
+        private void UpdateCheckPath(int value)
+        {
+            int tmp = checkPath.IndexOf(value);
+            checkPath.RemoveRange((tmp + 1), ((checkPath.Count - tmp) - 1));
+        }
+
+        private bool CheckNodeInPath(int q)
+        {
+            bool ok = true;
+            for (int i = 0; i < checkPath.Count; i++)
+            {
+                if (q == checkPath[i])
+                {
+                    ok = false;
+                }
+            }
+            return ok;
+        }
+
+        public List<int> Search()
+        {
+            if (this.root == null) return null;
+            return SearchPath(this.root);
+        }
+
+        private List<int> SearchPath(TreeNode node)
+        {
+            List<int> listToReturn = new List<int>();
+            List<TreeNode> tmp = this.root.Depth;
+            foreach (TreeNode item in tmp)
+            {
+                listToReturn.Add(item.Value);
+            }
+            return listToReturn;
         }
     }
 }

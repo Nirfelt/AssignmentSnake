@@ -40,24 +40,15 @@ namespace AssingmentSnake
                     else
                     {
                         grid[indexer] = new Node(c, i);
-                        if ((indexer + 1) < (i+1)*X) grid[indexer].Right = indexer + 1;
-                        if ((indexer - 1) > (i*X)-1) grid[indexer].Left = indexer - 1;
-                        if ((indexer + X) < (X*Y)) grid[indexer].Down = indexer + X;
-                        if ((indexer - X) >= 0) grid[indexer].Up = indexer - X;
+                        if ((indexer + 1) < (i+1)*X) grid[indexer].Edges.Add(indexer + 1);
+                        if ((indexer - 1) > (i*X)-1) grid[indexer].Edges.Add(indexer - 1);
+                        if ((indexer + X) < (X*Y)) grid[indexer].Edges.Add(indexer + X);
+                        if ((indexer - X) >= 0) grid[indexer].Edges.Add(indexer - X);
                     }
                     indexer++;
                 }
             }
             //System.Windows.Forms.MessageBox.Show("Right: " + grid[14].Right.ToString() + " Left: " + grid[14].Left.ToString() + " Up: " + grid[14].Up.ToString() + " Down: " + grid[14].Down.ToString());
-        }
-
-        public List<int[]> SearchPath()
-        {
-            int[] pathCord = new int[2];
-            List<int[]> path= new List<int[]>();
-
-
-            return path;
         }
 
         public string GetNodeString(int index)
@@ -104,6 +95,11 @@ namespace AssingmentSnake
         {
             get { return grid; }
             set { grid = value; }
+        }
+
+        public int IntFreeNodes
+        {
+            get { return (X*Y)-NumberOfObstacles; }
         }
     }
 }

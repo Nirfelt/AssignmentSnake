@@ -9,7 +9,8 @@ namespace AssingmentSnake
     public class Node
     {
         private bool visited, obstacle;
-        private int x, y, up = -1, down = -1, left = -1, right = -1;
+        private int x, y; //up = -1, down = -1, left = -1, right = -1;
+        private List<int> edges;
 
         public Node(int x, int y, bool obstacle = false)
         {
@@ -17,30 +18,13 @@ namespace AssingmentSnake
             Y = y;
             Obstacle = obstacle;
             Visited = false;
+            edges = new List<int>();
         }
 
-        public int Up
+        public List<int> Edges
         {
-            get { return up; }
-            set { up = value; }
-        }
-
-        public int Down
-        {
-            get { return down; }
-            set { down = value; }
-        }
-
-        public int Left
-        {
-            get { return left; }
-            set { left = value; }
-        }
-
-        public int Right
-        {
-            get { return right; }
-            set { right = value; }
+            get { return edges; }
+            set { edges = value; }
         }
 
         public int X
