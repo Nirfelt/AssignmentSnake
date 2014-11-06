@@ -54,6 +54,7 @@
             this.txbDisplay.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDisplay.Location = new System.Drawing.Point(12, 13);
             this.txbDisplay.Name = "txbDisplay";
+            this.txbDisplay.ReadOnly = true;
             this.txbDisplay.Size = new System.Drawing.Size(380, 337);
             this.txbDisplay.TabIndex = 1;
             this.txbDisplay.Text = "";

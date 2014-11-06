@@ -38,16 +38,19 @@ namespace AssingmentSnake
                 grid.GenerateGrid();
                 UpdateTxbDisplay();
                 tree = new Tree(grid.GridMap, grid.IntFreeNodes);
+                //MessageBox.Show(tree.pathsTried.ToString() + " " + tree.nodesCovered.ToString() + "/" + grid.IntFreeNodes.ToString());
             }
         }
 
         private void btnGetSolution_Click(object sender, EventArgs e)
         {
             List<int> tmp = tree.Search();
-            for (int i = 0; i < tmp.Count; i++)
-            {
-                MessageBox.Show(tmp[i].ToString());
-            }
+            //for (int i = 0; i < tmp.Count; i++)
+            //{
+            //    MessageBox.Show(tmp[i].ToString());
+            //}
+            //MessageBox.Show(tmp.Count.ToString());
+            MessageBox.Show(tree.pathsTried.ToString() + " " + tmp.Count.ToString() + "/" + grid.IntFreeNodes.ToString());
         }
 
         public void UpdateTxbDisplay()

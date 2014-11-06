@@ -12,6 +12,8 @@ namespace AssingmentSnake
         private Node[] gridMap;
         private List<int> checkPath;
         private int longestPath;
+        public int pathsTried = 0; //temp
+        public int nodesCovered = 0;
 
         public Tree(Node[] gridMap, int longestPath)
         {
@@ -31,6 +33,7 @@ namespace AssingmentSnake
                 GenerateTree(this.root);
             }
             if (node == null) return;
+            if (pathsTried > 100000) return; //temp
             for (int i = 0; i < gridMap[node.Value].Edges.Count; i++)
             {
                 TreeNode child = new TreeNode(gridMap[node.Value].Edges[i]);
@@ -47,6 +50,9 @@ namespace AssingmentSnake
                 else
                 {
                     UpdateCheckPath(node.Value);
+                    if (nodesCovered < checkPath.Count)
+                        nodesCovered = checkPath.Count;
+                    pathsTried++;//temp
                 }
             }
         }
