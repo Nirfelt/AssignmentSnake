@@ -9,8 +9,15 @@ namespace AssingmentSnake
     public class Node
     {
         private bool visited, obstacle;
-        private int x, y; //up = -1, down = -1, left = -1, right = -1;
+        private int x, y;
         private List<int> edges;
+
+        public Node(bool obstacle = false)
+        {
+            Obstacle = obstacle;
+            Visited = false;
+            edges = new List<int>();
+        }
 
         public Node(int x, int y, bool obstacle = false)
         {
@@ -65,6 +72,11 @@ namespace AssingmentSnake
             {
                 return "O";
             }
+        }
+
+        public string ToStringXY
+        {
+            get { return X + ", " + Y; }
         }
 
         public bool CheckNode()

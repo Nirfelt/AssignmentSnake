@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AssingmentSnake
@@ -14,48 +13,56 @@ namespace AssingmentSnake
     {
         private Grid grid;
         private Tree tree;
+        private Timer timer;
+        private List<int> path;
+        private int timerCount = 0;
 
         public MainForm()
         {
             InitializeComponent();
             grid = new Grid();
+            timer = new Timer();
+            path = new List<int>();
+            timer.Enabled = false;
+            timer.Interval = 50;
+            this.timer.Tick += new EventHandler(timer_Tick);
+            btnGetSolution.Enabled = false;
         }
 
         private void btnReadTxtFile_Click(object sender, EventArgs e)
         {
-            string path = string.Empty;
+            string filePath = string.Empty;
             openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             DialogResult result = openFileDialog1.ShowDialog();
             string errorMessage = string.Empty;
             if (result == DialogResult.OK)
             {
                 grid = new Grid();
-                path = openFileDialog1.FileName;
-                if (!grid.ReadFromTextFile(path, out errorMessage))
+                filePath = openFileDialog1.FileName;
+                if (!grid.ReadFromTextFile(filePath, out errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                 }
                 grid.GenerateGrid();
-                UpdateTxbDisplay();
                 tree = new Tree(grid.GridMap, grid.IntFreeNodes);
-                //MessageBox.Show(tree.pathsTried.ToString() + " " + tree.nodesCovered.ToString() + "/" + grid.IntFreeNodes.ToString());
+                this.path = tree.Search();
+                UpdateTxbDisplay();
+                btnGetSolution.Enabled = true;
+                lblNodes.Text = this.path.Count.ToString() + "/" + grid.IntFreeNodes.ToString();
+                //MessageBox.Show(tree.PathsTried + " " + this.path.Count.ToString() + "/" + grid.IntFreeNodes.ToString());
             }
         }
 
         private void btnGetSolution_Click(object sender, EventArgs e)
         {
-            List<int> tmp = tree.Search();
-            //for (int i = 0; i < tmp.Count; i++)
-            //{
-            //    MessageBox.Show(tmp[i].ToString());
-            //}
-            //MessageBox.Show(tmp.Count.ToString());
-            MessageBox.Show(tree.pathsTried.ToString() + " " + tmp.Count.ToString() + "/" + grid.IntFreeNodes.ToString());
+            UpdateTxbSolution(this.path);
+            timer.Enabled = true;
+            btnGetSolution.Enabled = false;
         }
 
         public void UpdateTxbDisplay()
         {
-            string output = null;
+            string output = string.Empty;
             int index = 0;
             for (int i = 0; i < grid.Y; i++)
             {
@@ -67,6 +74,31 @@ namespace AssingmentSnake
                 output += "\n";
             }
             txbDisplay.Text = output;
+        }
+
+        public void UpdateTxbSolution(List<int> tmp)
+        {
+            string output = string.Empty;
+            for (int i = 0; i < tmp.Count; i++)
+            {
+                output += grid.GridMap[tmp[i]].ToStringXY + "\n";
+            }
+            txbSolution.Text = output;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (timerCount < path.Count)
+            {
+                grid.GridMap[path[timerCount]].Visited = true;
+                UpdateTxbDisplay();
+                timerCount++;
+            }
+            else 
+            {
+                timer.Enabled = false;
+                timerCount = 0;
+            }
         }
     }
 }
