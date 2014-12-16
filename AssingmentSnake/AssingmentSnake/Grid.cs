@@ -19,10 +19,11 @@ namespace AssingmentSnake
             yValueObst = new List<int>();
         }
 
-        public void GenerateGrid()
+        public bool GenerateGrid()
         {
             int counter = 0;
             int indexer = 0;
+            if (X > 50 || Y > 50) return false;
             grid = new Node[X*Y];
             for (int i = 0; i < Y; i++)
             {
@@ -32,40 +33,25 @@ namespace AssingmentSnake
                     {
                         if ((xValueObst[counter] == c) && (yValueObst[counter] == i))
                         {
-                            //grid[indexer] = new Node(c, i, true);
                             CreateNode(indexer, c, i, true);
                             if (counter < numberOfObstacles - 1)
                             {
                                 counter++;
-                                //System.Windows.Forms.MessageBox.Show(indexer.ToString());
                             }
                         }
                         else
                         {
-                            //grid[indexer].X = c;
-                            //grid[indexer].Y = i;
                             CreateNode(indexer, c, i);
-                            //grid[indexer] = new Node(c, i);
-                            //if ((indexer - X) >= 0) grid[indexer].Edges.Add(indexer - X);//Up
-                            //if ((indexer + 1) < (i + 1) * X) grid[indexer].Edges.Add(indexer + 1);//Right
-                            //if ((indexer - 1) > (i * X) - 1) grid[indexer].Edges.Add(indexer - 1);//Left
-                            //if ((indexer + X) < (X * Y)) grid[indexer].Edges.Add(indexer + X);//Down
                         }
                     }
                     else
                     {
-                        //grid[indexer].X = c;
-                        //grid[indexer].Y = i;
                         CreateNode(indexer, c, i);
-                        //grid[indexer] = new Node(c, i);
-                        //if ((indexer - X) >= 0) grid[indexer].Edges.Add(indexer - X);//Up
-                        //if ((indexer + 1) < (i+1)*X) grid[indexer].Edges.Add(indexer + 1);//Right
-                        //if ((indexer - 1) > (i*X)-1) grid[indexer].Edges.Add(indexer - 1);//Left
-                        //if ((indexer + X) < (X*Y)) grid[indexer].Edges.Add(indexer + X);//Down
                     }
                     indexer++;
                 }
             }
+            return true;
         }
 
         private void CreateNode(int index, int x, int y, bool obst = false)

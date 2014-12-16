@@ -43,13 +43,20 @@ namespace AssingmentSnake
                 {
                     MessageBox.Show(errorMessage);
                 }
-                grid.GenerateGrid();
-                tree = new Tree(grid.GridMap, grid.IntFreeNodes);
-                this.path = tree.Search();
-                UpdateTxbDisplay();
-                btnGetSolution.Enabled = true;
-                lblNodes.Text = this.path.Count.ToString() + "/" + grid.IntFreeNodes.ToString();
-                //MessageBox.Show(tree.PathsTried + " " + this.path.Count.ToString() + "/" + grid.IntFreeNodes.ToString());
+                if (grid.GenerateGrid())
+                {
+                    tree = new Tree(grid.GridMap, grid.IntFreeNodes);
+                    this.path = tree.Search();
+                    UpdateTxbDisplay();
+                    btnGetSolution.Enabled = true;
+                    lblNodes.Text = this.path.Count.ToString() + "/" + grid.IntFreeNodes.ToString();
+                }
+                else
+                {
+                    grid = new Grid();
+                    ResetGUI();
+                    MessageBox.Show("Field is to big!");
+                }
             }
         }
 
@@ -84,6 +91,14 @@ namespace AssingmentSnake
                 output += grid.GridMap[tmp[i]].ToStringXY + "\n";
             }
             txbSolution.Text = output;
+        }
+
+        public void ResetGUI()
+        {
+            txbDisplay.Text = "";
+            txbSolution.Text = "";
+            lblNodes.Text = "0/0";
+            btnGetSolution.Enabled = false;
         }
 
         private void timer_Tick(object sender, EventArgs e)
